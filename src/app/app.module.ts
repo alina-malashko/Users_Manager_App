@@ -13,6 +13,7 @@ import { InputComponent } from './shared/components/input/input.component';
 import { InputErrorComponent } from './shared/components/input-error/input-error.component';
 import { FormControlPipe } from './shared/pipes/form-control.pipe';
 import { ButtonComponent } from './shared/components/button/button.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { ButtonComponent } from './shared/components/button/button.component';
     InputComponent,
     InputErrorComponent,
     FormControlPipe,
-    ButtonComponent
+    ButtonComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,
@@ -33,4 +35,4 @@ import { ButtonComponent } from './shared/components/button/button.component';
   providers: [AuthService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
