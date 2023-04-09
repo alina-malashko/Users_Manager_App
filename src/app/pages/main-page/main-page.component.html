@@ -1,1 +1,69 @@
-<p>main-page works!</p>
+<div class="page">
+  <header class="page__header">
+    <h1 class="page__header__title">Users Manager App</h1>
+    <div class="page__header__link">
+      <app-link
+        (click)="signOut()"
+      >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        stroke="#407bff"
+      >
+        <path
+          d="M15.1 16.44C14.79 20.04 12.94 21.51 8.88998 21.51L8.75998 21.51C4.28998 21.51 2.49998 19.72 2.49998 15.25L2.49998 8.73001C2.49998 4.26001 4.28998 2.47001 8.75998 2.47001L8.88998 2.47001C12.91 2.47001 14.76 3.92001 15.09 7.46001"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M9 12L20.38 12"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M18.15 15.35L21.5 12L18.15 8.64997"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+        Log out
+      </app-link>
+    </div>
+  </header>
+  <div *ngIf="isLoading" class="loader"></div>
+  <main *ngIf="!isLoading" class="page__main">
+    <div class="page__main__heading">
+      <app-input
+        placeholder="Search"
+        class="page__main__heading__search-input"
+      />
+      <app-button>Add user</app-button>
+    </div>
+    <div class="page__main__table">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let column of columns">{{column}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.name | username}}</td>
+            <td>{{user.location.city}}, {{user.location.country}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.dob.date | date}}</td>
+            <td>{{user.phone}}</td>
+            <td><a [href]="user.picture.large" title="image">link</a></td>
+            <td>{{user.nat}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

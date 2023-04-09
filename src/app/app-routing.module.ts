@@ -7,7 +7,7 @@ import { AppPath } from './shared/enums/routing-path-enum';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
-  {path: AppPath.Core, redirectTo: AppPath.SignIn, pathMatch: 'full'},
+  {path: AppPath.Core, redirectTo: AppPath.Main, pathMatch: 'full'},
   {path: AppPath.SignIn, component: LoginPageComponent},
   {path: AppPath.Main, component: MainPageComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundPageComponent},

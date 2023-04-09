@@ -14,24 +14,32 @@ export class AuthService {
     return this.auth
     .signInWithEmailAndPassword(email, password)
     .then(() => {
-      localStorage.setItem('token', 'true');
       this.auth.authState.subscribe((user) => {
         if (user) {
-          this.router.navigate([AppPath.MainFullPath]);
+          user.getIdTokenResult().then((data) => {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('expires', data.expirationTime);
+            this.router.navigate([AppPath.MainFullPath]);
+          })
         }
       });
     })
-    .catch((error)=> {
-      console.log(error);
-      this.router.navigate([AppPath.SignInFullPath]);
-      throw new Error;
-    });
   }
 
   signOut() {
     return this.auth.signOut().then(() => {
       localStorage.removeItem('token');
+      localStorage.removeItem('expires');
       this.router.navigate([AppPath.SignInFullPath]);
     });
+  }
+
+  isUserAuthorized() {
+    const token = localStorage.getItem('token');
+    const expires = localStorage.getItem('expires');
+    if (token && expires) {
+      return new Date(expires) > new Date();
+    }
+    return false;
   }
 }
