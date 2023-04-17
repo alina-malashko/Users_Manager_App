@@ -18,6 +18,8 @@ export class MainPageComponent implements OnInit {
 
   public errorMessage: boolean = false;
 
+  public addPopUpIsOpened: boolean | undefined;
+
   constructor(
     private usersService: UsersService,
     private readonly store: Store
@@ -43,5 +45,10 @@ export class MainPageComponent implements OnInit {
         }
     });
     }
+    this.addPopUpIsOpened = false;
+  }
+
+  public toggleAddPopUp(): void {
+    this.addPopUpIsOpened = !this.addPopUpIsOpened;
   }
 }

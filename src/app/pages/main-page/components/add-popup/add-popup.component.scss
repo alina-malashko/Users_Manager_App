@@ -1,0 +1,57 @@
+@import '../../../../../assets/scss/variables.scss';
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & .modal {
+    background-color: $background-main;
+    border-radius: 15px;
+    width: 420px;
+    padding: 20px 50px;
+    color: $text-dark-blue;
+    position: relative;
+    text-align: center;
+    &__close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+    }
+    &__title {
+      font-weight: 500;
+      font-size: 1.5em;
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      &__input {
+        height: 42px;
+      }
+      &__date {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__input {
+          height: 42px;
+          width: 60%;
+        }
+      }
+      &__button {
+        width: 170px;
+        height: 54px;
+        margin: auto;
+      }
+    }
+  }
+}

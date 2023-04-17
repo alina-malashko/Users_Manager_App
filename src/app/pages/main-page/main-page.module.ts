@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
 import { TableComponent } from './components/table/table.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
+import { AddPopupComponent } from './components/add-popup/add-popup.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SearchFormComponent } from './components/search-form/search-form.compon
     TableComponent,
     SearchFormComponent,
     AddButtonComponent,
+    AddPopupComponent,
   ],
   imports: [
     CommonModule,

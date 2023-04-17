@@ -17,7 +17,9 @@
         <app-search-form></app-search-form>
       </div>
       <div class="page__main__heading__button">
-        <app-add-button></app-add-button>
+        <app-add-button
+          (click)="toggleAddPopUp()"
+        ></app-add-button>
       </div>
     </div>
     <div class="page__main__table">
@@ -26,4 +28,8 @@
       ></app-table>
     </div>
   </main>
+  <app-add-popup
+    *ngIf="addPopUpIsOpened"
+    (toggleAddPopUp)="toggleAddPopUp()"
+  ></app-add-popup>
 </div>

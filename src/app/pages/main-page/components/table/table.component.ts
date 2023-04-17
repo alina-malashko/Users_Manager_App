@@ -77,7 +77,7 @@ export class TableComponent {
       sortable: true,
       comparator: this.sortDates,
       valueFormatter: (params: ValueFormatterParams) => {
-        return new Date(params.data.registered).toDateString().split(' ').splice(1).join(' ')
+        return new Date(params.data.birth).toDateString().split(' ').splice(1).join(' ')
       }
     },
     {

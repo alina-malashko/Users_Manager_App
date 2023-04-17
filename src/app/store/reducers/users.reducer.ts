@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
 import { UsersState } from '../../interfaces/user.interface';
 import {
@@ -6,7 +7,8 @@ import {
   LoadingOffUsers,
   LoadUserInfo,
   DeleteUser,
-  EditUser
+  EditUser,
+  AddUser
 } from '../actions';
 
 const initialState: UsersState = {
@@ -54,5 +56,13 @@ export const usersReducer = createReducer(
       users: usersList,
       userInfo: data
     }
-  })
+  }),
+  on(AddUser, (state, { data }) => {
+    const usersList = [...state.users];
+    usersList.push(data);
+    return {
+      ...state,
+      users: usersList
+    }
+  }),
 )

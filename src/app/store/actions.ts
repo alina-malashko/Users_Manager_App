@@ -6,7 +6,8 @@ import {
   LOADING_OFF_USERS,
   DELETE_USER,
   LOAD_USER_INFO,
-  EDIT_USER
+  EDIT_USER,
+  ADD_USER
 } from './types';
 
 export const LoadingOnUsers = createAction(
@@ -28,6 +29,11 @@ export const DeleteUser = createAction(
 
 export const EditUser = createAction(
   EDIT_USER,
+  props<{data: User}>()
+);
+
+export const AddUser = createAction(
+  ADD_USER,
   props<{data: User}>()
 );
 
