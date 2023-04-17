@@ -1,0 +1,145 @@
+<div class="page">
+  <header class="page__header">
+    <app-link-back></app-link-back>
+    <app-logout></app-logout>
+  </header>
+  <main class="page__main">
+    <h2 class="page__main__title">
+      User's Information
+    </h2>
+    <form
+      *ngIf="editForm"
+      [formGroup]="editForm"
+      (ngSubmit)="saveUser()"
+      class="page__main__form"
+    >
+      <div class="page__main__form__label">Photo</div>
+      <div class="page__main__form__container">
+        <img
+          *ngIf="userInfo"
+          [src]="userInfo.picture"
+          alt="photo"
+          class="page__main__form__container__photo"
+        >
+        <div class="page__main__form__container__delete-button">
+          <app-delete-button
+            (click)="toggleDeletePopUp()"
+          ></app-delete-button>
+        </div>
+      </div>
+      <div class="page__main__form__label">Title</div>
+      <div class="page__main__form__input">
+        <app-input
+          type="text"
+          placeholder="Title"
+          formControlName="title"
+        ></app-input>
+      </div>
+      <div class="page__main__form__label">First Name</div>
+      <div class="page__main__form__input">
+        <app-input
+          type="text"
+          placeholder="First name"
+          formControlName="firstName"
+        ></app-input>
+      </div>
+      <div class="page__main__form__label">Last Name</div>
+      <div class="page__main__form__input">
+        <app-input
+          type="text"
+          placeholder="Last Name"
+          formControlName="lastName"
+        ></app-input>
+      </div>
+      <div class="page__main__form__label">City</div>
+      <div class="page__main__form__input">
+        <app-input
+          type="text"
+          placeholder="City"
+          formControlName="city"
+        ></app-input>
+      </div>
+      <div class="page__main__form__label">Country</div>
+      <div class="page__main__form__input">
+        <app-input
+          type="text"
+          placeholder="Country"
+          formControlName="country"
+        ></app-input>
+      </div>
+      <div class="page__main__form__label">Email</div>
+      <div class="page__main__form__input">
+        <app-input
+          type="text"
+          placeholder="Email"
+          formControlName="email"
+        ></app-input>
+      </div>
+      <div class="page__main__form__label">Date of birth</div>
+      <div *ngIf="userInfo" class="page__main__form__input-group">
+        <div class="page__main__form__input-group__date">
+          {{editForm.controls['birth'].value | date}}
+        </div>
+        <div class="page__main__form__input-group__input">
+          <app-input
+            type="date"
+            placeholder="Date of birth"
+            formControlName="birth"
+          ></app-input>
+        </div>
+      </div>
+      <div class="page__main__form__label">Registered</div>
+      <div *ngIf="userInfo" class="page__main__form__input-group">
+        <div class="page__main__form__input-group__date">
+          {{editForm.controls['registered'].value | date}}
+        </div>
+        <div class="page__main__form__input-group__input">
+          <app-input
+            type="date"
+            placeholder="Registered"
+            formControlName="registered"
+          ></app-input>
+        </div>
+      </div>
+      <div class="page__main__form__label">Phone</div>
+      <div class="page__main__form__input">
+        <app-input
+          type="text"
+          placeholder="Phone"
+          formControlName="phone"
+        ></app-input>
+      </div>
+      <div class="page__main__form__label">Photo link</div>
+      <div class="page__main__form__input">
+        <app-input
+          type="text"
+          placeholder="Photo"
+          formControlName="picture"
+        ></app-input>
+      </div>
+      <div class="page__main__form__label">Nationality</div>
+      <div class="page__main__form__input">
+        <app-input
+          type="text"
+          placeholder="Nationality"
+          formControlName="nationality"
+        ></app-input>
+      </div>
+      <div></div>
+      <div class="page__main__form__button">
+        <app-button
+          [isLoading]="isLoading"
+          [disabled]="editForm.invalid"
+          class="page__main__form__button__item"
+          (click)="saveUser()"
+        >
+          Save
+        </app-button>
+      </div>
+    </form>
+  </main>
+  <app-delete-popup
+    *ngIf="deletePopUpIsOpened"
+    (toggleDeletePopUp)="toggleDeletePopUp()"
+  ></app-delete-popup>
+</div>

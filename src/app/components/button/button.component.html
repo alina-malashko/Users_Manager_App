@@ -1,0 +1,6 @@
+<button [disabled]="disabled" class="button">
+  <ng-content *ngIf="!isLoading"></ng-content>
+  <div *ngIf="isLoading" class="button__loader">
+    <app-loader></app-loader>
+  </div>
+</button>

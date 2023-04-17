@@ -1,0 +1,15 @@
+@import '../../../../../assets/scss/variables.scss';
+
+.ag-theme-alpine {
+  --ag-foreground-color: #25225d;
+  --ag-odd-row-background-color: #f3f3f3;
+  --ag-font-family: 'Red Hat Display', sans-serif;
+  & a {
+    color: $text-blue;
+  }
+
+}
+.ag-header {
+  background: $background-main;
+  border-bottom: 1px solid $text-grey;
+}
