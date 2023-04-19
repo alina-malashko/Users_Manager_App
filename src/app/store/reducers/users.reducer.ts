@@ -1,20 +1,17 @@
-import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
 import { UsersState } from '../../interfaces/user.interface';
 import {
-  LoadUsers,
+  GetUsers,
   LoadingOnUsers,
   LoadingOffUsers,
-  LoadUserInfo,
   DeleteUser,
   EditUser,
   AddUser
-} from '../actions';
+} from '../actions/users.action';
 
 const initialState: UsersState = {
   isLoadingUsers: true,
   users: [],
-  userInfo: null
 }
 
 export const usersReducer = createReducer(
@@ -27,18 +24,13 @@ export const usersReducer = createReducer(
     ...state,
     isLoadingUsers: false
   })),
-  on(LoadUsers, (state, { data }) => ({
+  on(GetUsers, (state, { data }) => ({
     ...state,
     users: data
   })),
-  on(LoadUserInfo, (state, { data }) => ({
+  on(DeleteUser, (state, { data }) => ({
     ...state,
-    userInfo: data
-  })),
-  on(DeleteUser, (state) => ({
-    ...state,
-    users: state.users.filter(user => user.id != state.userInfo?.id),
-    userInfo: null
+    users: state.users.filter(user => user.id != data),
   })),
   on(EditUser, (state, { data }) => {
     const usersList = state.users.map((user) => {
@@ -54,15 +46,16 @@ export const usersReducer = createReducer(
     return {
       ...state,
       users: usersList,
-      userInfo: data
     }
   }),
-  on(AddUser, (state, { data }) => {
-    const usersList = [...state.users];
-    usersList.push(data);
-    return {
-      ...state,
-      users: usersList
-    }
-  }),
+  on(AddUser, (state, { data }) => ({
+    ...state,
+    users: [
+      ...state.users,
+      {
+        ...data,
+        id: state.users.length
+      }
+    ]
+  })),
 )

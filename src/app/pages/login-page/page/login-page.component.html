@@ -21,7 +21,7 @@
         formControlName="password"
       />
       <div
-        *ngIf="authFailed && !signInForm.controls['password'].invalid"
+        *ngIf="authFailed"
         class="page__container__form__error"
       >
         <app-input-error>Wrong email or password</app-input-error>

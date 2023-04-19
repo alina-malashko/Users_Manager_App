@@ -8,27 +8,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from 'src/app/components/input/input.component';
 
+const components = [
+  InputComponent,
+  InputErrorComponent,
+  ButtonComponent,
+  LoaderComponent,
+  LinkComponent,
+  LogoutComponent,
+];
 @NgModule({
-  declarations: [
-    InputComponent,
-    InputErrorComponent,
-    ButtonComponent,
-    LoaderComponent,
-    LinkComponent,
-    LogoutComponent
-  ],
+  declarations: components,
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule
   ],
-  exports: [
-    InputComponent,
-    InputErrorComponent,
-    ButtonComponent,
-    LoaderComponent,
-    LinkComponent,
-    LogoutComponent
-  ]
+  exports: components
 })
 export class ComponentsModule { }

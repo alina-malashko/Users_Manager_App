@@ -5,13 +5,9 @@
     class="input__field"
     [(ngModel)]="value"
     (ngModelChange)="inputChanged($event)"
-    #input="ngModel"
     [disabled]="disabled"
   >
-  <div
-    *ngIf="input.touched"
-    class="input__error"
-  >
+  <div class="input__error">
     <app-input-error>Required field</app-input-error>
   </div>
 </div>

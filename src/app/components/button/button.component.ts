@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
 
-  @Input() isLoading?: boolean = false;
+  @Input() isLoading: boolean | undefined;
 
-  @Input() disabled?: boolean = false;
+  @Input() disabled: boolean | undefined;
 }

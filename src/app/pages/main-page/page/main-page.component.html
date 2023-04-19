@@ -28,8 +28,5 @@
       ></app-table>
     </div>
   </main>
-  <app-add-popup
-    *ngIf="addPopUpIsOpened"
-    (toggleAddPopUp)="toggleAddPopUp()"
-  ></app-add-popup>
+  <ng-template modalHost></ng-template>
 </div>

@@ -1,4 +1,4 @@
-import { PromiseToObservableService } from './promise-to-observable.service';
+import { HelpersService } from './helpers.service';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
@@ -13,13 +13,13 @@ export class AuthService {
   constructor(
     private auth: AngularFireAuth,
     private router: Router,
-    private promiseToObservableService: PromiseToObservableService
+    private helpersService: HelpersService
   ) {}
 
   public signIn(email: string, password: string): Observable<any> {
 
     const sideEffects = (user: any): Observable<any> => {
-      return this.promiseToObservableService
+      return this.helpersService
       .promiseToObservable(user?.getIdTokenResult())
       .pipe(
         tap((data: any) => {
@@ -30,7 +30,7 @@ export class AuthService {
       )
     }
 
-    return this.promiseToObservableService
+    return this.helpersService
     .promiseToObservable(this.auth.signInWithEmailAndPassword(email, password))
     .pipe(
       mergeMap(() => this.auth.authState
@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   public signOut(): Observable<any> {
-    return this.promiseToObservableService.promiseToObservable(this.auth.signOut())
+    return this.helpersService.promiseToObservable(this.auth.signOut())
     .pipe(
       tap(() => {
         localStorage.removeItem('token');

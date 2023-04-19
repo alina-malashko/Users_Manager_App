@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from './enums/routing-path-enum';
 import { AuthGuard } from './guards/auth.guard';
-import { EditGuard } from './guards/edit.guard';
 
 const routes: Routes = [
   {
@@ -22,7 +21,7 @@ const routes: Routes = [
   {
     path: AppPath.EditPage,
     loadChildren: () => import('./pages/edit-user-page/edit-user-page.module').then(m => m.EditUserPageModule),
-    canActivate: [EditGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

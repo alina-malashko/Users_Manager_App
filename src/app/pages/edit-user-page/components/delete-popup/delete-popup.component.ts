@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppPath } from 'src/app/enums/routing-path-enum';
-import { DeleteUser } from 'src/app/store/actions';
+import { DeleteUser } from 'src/app/store/actions/users.action';
 
 @Component({
   selector: 'app-delete-popup',
@@ -10,6 +10,8 @@ import { DeleteUser } from 'src/app/store/actions';
   styleUrls: ['./delete-popup.component.scss']
 })
 export class DeletePopupComponent implements OnInit {
+
+  @Input() id: string | null | undefined;
 
   @Output() toggleDeletePopUp = new EventEmitter<null>();
 
@@ -30,7 +32,7 @@ export class DeletePopupComponent implements OnInit {
 
   public deleteUser(): void {
     this.isLoading = true;
-    this.store.dispatch(DeleteUser());
+    if (this.id) this.store.dispatch(DeleteUser({data: Number(this.id)}));
     this.router.navigate([AppPath.MainFullPath]);
   }
 }

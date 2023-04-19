@@ -1,9 +1,10 @@
+import { UsersState } from './../interfaces/user.interface';
 import { ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
 import { usersReducer } from './reducers/users.reducer';
 import { localStorageSync } from 'ngrx-store-localstorage';
 
 export interface AppState {
-  users: any,
+  users: UsersState
 }
 
 export const reducers: ActionReducerMap<AppState, any> = {

@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { URL_PATTERN } from './../../../constants/pattern.constants';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { AppPath } from 'src/app/enums/routing-path-enum';
 import { User } from 'src/app/interfaces/user.interface';
-import { EditUser } from 'src/app/store/actions';
+import { EditUser } from 'src/app/store/actions/users.action';
+import { selectUsers } from 'src/app/store/selectors/users.selector';
+import { DeletePopupComponent } from '../components/delete-popup/delete-popup.component';
+import { ModalDirective } from 'src/app/directives/modal.directive';
 
 @Component({
   selector: 'app-page',
@@ -11,6 +16,10 @@ import { EditUser } from 'src/app/store/actions';
   styleUrls: ['./edit-user-page.component.scss']
 })
 export class EditUserPageComponent implements OnInit {
+
+  @ViewChild(ModalDirective) modalHost!: ModalDirective;
+
+  public id: string | null | undefined;
 
   public isLoading: boolean | undefined;
 
@@ -23,56 +32,56 @@ export class EditUserPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private readonly store: Store,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
     this.isLoading = false;
     this.deletePopUpIsOpened = false;
-    this.store.pipe(map((elem: any) => elem.users.userInfo)).subscribe((value) => this.userInfo = value);
+    this.store.select(selectUsers).subscribe((value) => this.userInfo = value.find(user => user.id == this.id));
     this.initForm();
   }
 
   private initForm(): void {
     this.editForm = this.formBuilder.group({
-      title: [this.userInfo?.name.title, Validators.required],
-      firstName: [this.userInfo?.name.first, Validators.required],
-      lastName: [this.userInfo?.name.last, Validators.required],
-      city: [this.userInfo?.location.city, Validators.required],
-      country: [this.userInfo?.location.country, Validators.required],
+      name: this.formBuilder.group({
+        title: [this.userInfo?.name.title, Validators.required],
+        first: [this.userInfo?.name.first, Validators.required],
+        last: [this.userInfo?.name.last, Validators.required],
+      }),
+      location: this.formBuilder.group({
+        city: [this.userInfo?.location.city, Validators.required],
+        country: [this.userInfo?.location.country, Validators.required],
+      }),
       email: [this.userInfo?.email, [Validators.required, Validators.email]],
       birth: [this.userInfo?.birth, Validators.required],
       registered: [{value: this.userInfo?.registered, disabled: true}],
       phone: [this.userInfo?.phone, Validators.required],
-      picture: [this.userInfo?.picture, [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
+      picture: [this.userInfo?.picture, [Validators.required, Validators.pattern(URL_PATTERN)]],
       nationality: [this.userInfo?.nationality, Validators.required]
     })
   }
 
   public saveUser(): void {
-    if (this.userInfo) {
-      const editedUser = {
-        id: this.userInfo.id,
-        name: {
-          title: this.editForm?.controls['title'].value,
-          first: this.editForm?.controls['firstName'].value,
-          last: this.editForm?.controls['lastName'].value,
-        },
-        location: {
-          city: this.editForm?.controls['city'].value,
-          country: this.editForm?.controls['country'].value,
-        },
-        email: this.editForm?.controls['email'].value,
-        birth: this.editForm?.controls['birth'].value,
-        registered: this.editForm?.controls['registered'].value,
-        phone: this.editForm?.controls['phone'].value,
-        picture: this.editForm?.controls['picture'].value,
-        nationality: this.editForm?.controls['nationality'].value,
-      }
-      this.store.dispatch(EditUser({data: editedUser}));
+    this.isLoading = true;
+    const editedUser = {
+      id: this.userInfo?.id,
+      ...this.editForm?.getRawValue()
     }
+    this.store.dispatch(EditUser({data: editedUser}));
+    this.isLoading = false;
+    this.router.navigate([AppPath.MainFullPath]);
   }
 
   public toggleDeletePopUp(): void {
-    this.deletePopUpIsOpened = !this.deletePopUpIsOpened;
+    const viewContainerRef = this.modalHost.viewContainerRef;
+    viewContainerRef.clear();
+    const componentRef = viewContainerRef.createComponent(DeletePopupComponent);
+    componentRef.instance.id = this.id;
+    componentRef.instance.toggleDeletePopUp.subscribe(() => {
+      this.modalHost.viewContainerRef.clear();
+    })
   }
 }

@@ -27,46 +27,50 @@
           ></app-delete-button>
         </div>
       </div>
-      <div class="page__main__form__label">Title</div>
-      <div class="page__main__form__input">
-        <app-input
-          type="text"
-          placeholder="Title"
-          formControlName="title"
-        ></app-input>
-      </div>
-      <div class="page__main__form__label">First Name</div>
-      <div class="page__main__form__input">
-        <app-input
-          type="text"
-          placeholder="First name"
-          formControlName="firstName"
-        ></app-input>
-      </div>
-      <div class="page__main__form__label">Last Name</div>
-      <div class="page__main__form__input">
-        <app-input
-          type="text"
-          placeholder="Last Name"
-          formControlName="lastName"
-        ></app-input>
-      </div>
-      <div class="page__main__form__label">City</div>
-      <div class="page__main__form__input">
-        <app-input
-          type="text"
-          placeholder="City"
-          formControlName="city"
-        ></app-input>
-      </div>
-      <div class="page__main__form__label">Country</div>
-      <div class="page__main__form__input">
-        <app-input
-          type="text"
-          placeholder="Country"
-          formControlName="country"
-        ></app-input>
-      </div>
+      <ng-container formGroupName="name">
+        <div class="page__main__form__label">Title</div>
+        <div class="page__main__form__input">
+          <app-input
+            type="text"
+            placeholder="Title"
+            formControlName="title"
+          ></app-input>
+        </div>
+        <div class="page__main__form__label">First Name</div>
+        <div class="page__main__form__input">
+          <app-input
+            type="text"
+            placeholder="First name"
+            formControlName="first"
+          ></app-input>
+        </div>
+        <div class="page__main__form__label">Last Name</div>
+        <div class="page__main__form__input">
+          <app-input
+            type="text"
+            placeholder="Last Name"
+            formControlName="last"
+          ></app-input>
+        </div>
+      </ng-container>
+      <ng-container formGroupName="location">
+        <div class="page__main__form__label">City</div>
+        <div class="page__main__form__input">
+          <app-input
+            type="text"
+            placeholder="City"
+            formControlName="city"
+          ></app-input>
+        </div>
+        <div class="page__main__form__label">Country</div>
+        <div class="page__main__form__input">
+          <app-input
+            type="text"
+            placeholder="Country"
+            formControlName="country"
+          ></app-input>
+        </div>
+      </ng-container>
       <div class="page__main__form__label">Email</div>
       <div class="page__main__form__input">
         <app-input
@@ -137,8 +141,5 @@
       </div>
     </form>
   </main>
-  <app-delete-popup
-    *ngIf="deletePopUpIsOpened"
-    (toggleDeletePopUp)="toggleDeletePopUp()"
-  ></app-delete-popup>
+  <ng-template modalHost></ng-template>
 </div>

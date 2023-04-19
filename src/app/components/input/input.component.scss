@@ -1,5 +1,23 @@
 @import '../../../assets/scss/variables.scss';
 
+:host {
+  &.ng-invalid.ng-touched {
+    & .input__field {
+      color: $text-error;
+      border-color: $input-stroke-error;
+      &:hover, &:focus {
+        border-color: $input-stroke-error;
+      }
+      &::placeholder, &:focus::placeholder {
+        color: $text-error
+      }
+    }
+    & .input__error {
+      display: block;
+    }
+  }
+}
+
 .input {
   position: relative;
   width: 100%;
@@ -17,7 +35,7 @@
     outline: none;
     color: $text-dark-blue;
     border: 1px solid transparent;
-    &:hover, &:focus {
+    &:hover:not(:disabled), &:focus {
       border-color: $input-stroke-active;
     }
     &::placeholder {
@@ -29,30 +47,13 @@
     &:focus::placeholder {
       color: $text-grey;
     }
+    &:disabled {
+      color: $text-grey;
+    }
   }
   &__error {
     top: 100%;
     position: absolute;
-  }
-}
-.ng-invalid {
-  color: $text-error;
-  border-color: $input-stroke-error;
-  &:hover, &:focus {
-    border-color: $input-stroke-error;
-  }
-  &::placeholder, &:focus::placeholder {
-    color: $text-error
-  }
-}
-
-.ng-touched {
-  color: $text-error;
-  border-color: $input-stroke-error;
-  &:hover, &:focus {
-    border-color: $input-stroke-error;
-  }
-  &::placeholder, &:focus::placeholder {
-    color: $text-error
+    display: none;
   }
 }

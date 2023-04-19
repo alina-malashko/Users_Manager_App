@@ -1,9 +1,11 @@
-import { map } from 'rxjs';
-import { LoadUsers, LoadingOffUsers, LoadUserInfo } from './../../../store/actions';
+import { GetUsers, LoadingOffUsers } from '../../../store/actions/users.action';
 import { Store } from '@ngrx/store';
 import { User } from '../../../interfaces/user.interface';
 import { UsersService } from '../../../services/users.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { selectIsLoadingUsers, selectUsers } from 'src/app/store/selectors/users.selector';
+import { ModalDirective } from 'src/app/directives/modal.directive';
+import { AddPopupComponent } from '../components/add-popup/add-popup.component';
 
 @Component({
   selector: 'app-main-page',
@@ -12,13 +14,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
+  @ViewChild(ModalDirective) modalHost!: ModalDirective;
+
   public isLoading: boolean = true;
 
   public users: User[] | undefined;
 
   public errorMessage: boolean = false;
-
-  public addPopUpIsOpened: boolean | undefined;
 
   constructor(
     private usersService: UsersService,
@@ -28,16 +30,15 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     let users = localStorage.getItem('users');
     if (users) {
-      this.store.pipe(map((elem: any) => elem.users.users)).subscribe((value) => this.users = value);
-      this.store.pipe(map((elem: any) => elem.users.isLoading)).subscribe((value) => this.isLoading = value);
+      this.store.select(selectUsers).subscribe((value) => this.users = value);
+      this.store.select(selectIsLoadingUsers).subscribe((value) => this.isLoading = value)
     } else {
       this.usersService.getUsers().subscribe({
         next: data => {
-          this.store.dispatch(LoadUsers({data: data}));
-          this.store.dispatch(LoadUserInfo({data: null}));
+          this.store.dispatch(GetUsers({data: data}));
           this.store.dispatch(LoadingOffUsers());
-          this.store.pipe(map((elem: any) => elem.users.users)).subscribe((value) => this.users = value);
-          this.store.pipe(map((elem: any) => elem.users.isLoading)).subscribe((value) => this.isLoading = value);
+          this.store.select(selectUsers).subscribe((value) => this.users = value);
+          this.store.select(selectIsLoadingUsers).subscribe((value) => this.isLoading = value)
         },
         error: () => {
           this.errorMessage = true;
@@ -45,10 +46,14 @@ export class MainPageComponent implements OnInit {
         }
     });
     }
-    this.addPopUpIsOpened = false;
   }
 
   public toggleAddPopUp(): void {
-    this.addPopUpIsOpened = !this.addPopUpIsOpened;
+    const viewContainerRef = this.modalHost.viewContainerRef;
+    viewContainerRef.clear();
+    const componentRef = viewContainerRef.createComponent(AddPopupComponent);
+    componentRef.instance.toggleAddPopUp.subscribe(() => {
+      this.modalHost.viewContainerRef.clear();
+    })
   }
 }

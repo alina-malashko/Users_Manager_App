@@ -1,3 +1,4 @@
+import { ModalDirective } from 'src/app/directives/modal.directive';
 import { AddButtonComponent } from './components/add-button/add-button.component';
 import { MainPageRoutingModule } from './main-page-routing.module';
 import { ComponentsModule } from './../../components/components.module';
@@ -17,6 +18,7 @@ import { AddPopupComponent } from './components/add-popup/add-popup.component';
     SearchFormComponent,
     AddButtonComponent,
     AddPopupComponent,
+    ModalDirective
   ],
   imports: [
     CommonModule,

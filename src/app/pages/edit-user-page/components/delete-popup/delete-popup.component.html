@@ -1,34 +1,36 @@
-<div class="overlay">
-  <div class="modal">
-    <div
-      class="modal__close"
-      (click)="togglePopUp()"
+<div
+  class="overlay"
+  (click)="togglePopUp()"
+></div>
+<div class="modal">
+  <div
+    class="modal__close"
+    (click)="togglePopUp()"
+  >
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M4.46972 4.46962C4.76264 4.17675 5.23752 4.1768 5.53038 4.46972L11.9988 10.9393L18.4697 4.46962C18.7626 4.17675 19.2375 4.1768 19.5304 4.46972C19.8232 4.76264 19.8232 5.23752 19.5303 5.53038L13.06 11.9994L19.5303 18.4697C19.8232 18.7626 19.8232 19.2374 19.5303 19.5303C19.2374 19.8232 18.7626 19.8232 18.4697 19.5303L12 13.0607L5.53033 19.5303C5.23744 19.8232 4.76256 19.8232 4.46967 19.5303C4.17678 19.2374 4.17678 18.7626 4.46967 18.4697L10.9387 12.0006L4.46962 5.53028C4.17675 5.23736 4.1768 4.76248 4.46972 4.46962Z"
-          fill="#25225D"
-        />
-      </svg>
-    </div>
-    <h3 class="modal__title">
-      Do you want to delete user?
-    </h3>
-    <div class="modal__button">
-      <app-button
-        [isLoading]="isLoading"
-        (click)="deleteUser()"
-      >
-        Delete
-      </app-button>
-    </div>
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M4.46972 4.46962C4.76264 4.17675 5.23752 4.1768 5.53038 4.46972L11.9988 10.9393L18.4697 4.46962C18.7626 4.17675 19.2375 4.1768 19.5304 4.46972C19.8232 4.76264 19.8232 5.23752 19.5303 5.53038L13.06 11.9994L19.5303 18.4697C19.8232 18.7626 19.8232 19.2374 19.5303 19.5303C19.2374 19.8232 18.7626 19.8232 18.4697 19.5303L12 13.0607L5.53033 19.5303C5.23744 19.8232 4.76256 19.8232 4.46967 19.5303C4.17678 19.2374 4.17678 18.7626 4.46967 18.4697L10.9387 12.0006L4.46962 5.53028C4.17675 5.23736 4.1768 4.76248 4.46972 4.46962Z"
+        fill="#25225D"
+      />
+    </svg>
+  </div>
+  <h3 class="modal__title">
+    Do you want to delete user?
+  </h3>
+  <div class="modal__button">
+    <app-button
+      [isLoading]="isLoading"
+      (click)="deleteUser()"
+    >
+      Delete
+    </app-button>
   </div>
 </div>

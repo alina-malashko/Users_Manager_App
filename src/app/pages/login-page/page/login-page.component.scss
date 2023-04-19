@@ -47,6 +47,10 @@
       &__error {
         position: absolute;
         bottom: 30%;
+        display: block;
+      }
+      &.ng-touched.ng-invalid &__error {
+        display: none;
       }
       &__button {
         width: 350px;

@@ -1,3 +1,4 @@
+import { ModalDirective } from '../../directives/modal.directive';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditUserPageComponent } from './page/edit-user-page.component';
@@ -14,7 +15,8 @@ import { DeletePopupComponent } from './components/delete-popup/delete-popup.com
     EditUserPageComponent,
     LinkBackComponent,
     DeleteButtonComponent,
-    DeletePopupComponent
+    DeletePopupComponent,
+    ModalDirective
   ],
   imports: [
     CommonModule,

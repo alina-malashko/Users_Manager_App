@@ -8,7 +8,7 @@ export interface UserLocation {
   country: string
 }
 export interface User {
-  id: number,
+  id?: number,
   name: UserName,
   location: UserLocation,
   email: string,
@@ -20,6 +20,5 @@ export interface User {
 }
 export interface UsersState {
   isLoadingUsers: boolean,
-  users: User[],
-  userInfo: User | null
+  users: User[]
 }

@@ -32,6 +32,7 @@ export class LoginPageComponent implements OnInit {
 
   public signIn(): void {
     this.isLoading = true;
+    this.authFailed = false;
     this.authService.signIn(this.signInForm?.value.email, this.signInForm?.value.password)
     .subscribe({
       next: () => this.isLoading = false,
