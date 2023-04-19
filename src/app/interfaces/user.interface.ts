@@ -20,5 +20,6 @@ export interface User {
 }
 export interface UsersState {
   isLoadingUsers: boolean,
-  users: User[]
+  users: User[],
+  error: boolean
 }

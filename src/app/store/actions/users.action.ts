@@ -6,13 +6,13 @@ export const LoadingOnUsers = createAction(
   ActionTypes.LOADING_ON_USERS
 );
 
-export const LoadingOffUsers = createAction(
-  ActionTypes.LOADING_OFF_USERS
-);
-
 export const GetUsers = createAction(
   ActionTypes.GET_USERS,
-  props<{data: User[]}>()
+  props<{users: User[]}>()
+);
+
+export const GetUsersFailed = createAction(
+  ActionTypes.GET_USERS_FAILED
 );
 
 export const DeleteUser = createAction(

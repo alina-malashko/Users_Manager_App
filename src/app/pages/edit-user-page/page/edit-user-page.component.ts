@@ -8,7 +8,7 @@ import { User } from 'src/app/interfaces/user.interface';
 import { EditUser } from 'src/app/store/actions/users.action';
 import { selectUsers } from 'src/app/store/selectors/users.selector';
 import { DeletePopupComponent } from '../components/delete-popup/delete-popup.component';
-import { ModalDirective } from 'src/app/directives/modal.directive';
+import { ModalDirective } from 'src/app/directives/directives/modal.directive';
 
 @Component({
   selector: 'app-page',

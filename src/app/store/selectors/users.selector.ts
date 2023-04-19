@@ -12,3 +12,8 @@ export const selectUsers = createSelector(
   selectUsersFeature,
   (state: UsersState) => state.users
 )
+
+export const selectUsersError = createSelector(
+  selectUsersFeature,
+  (state: UsersState) => state.error
+)

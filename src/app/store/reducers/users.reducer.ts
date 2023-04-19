@@ -2,8 +2,8 @@ import { createReducer, on } from '@ngrx/store';
 import { UsersState } from '../../interfaces/user.interface';
 import {
   GetUsers,
+  GetUsersFailed,
   LoadingOnUsers,
-  LoadingOffUsers,
   DeleteUser,
   EditUser,
   AddUser
@@ -12,6 +12,7 @@ import {
 const initialState: UsersState = {
   isLoadingUsers: true,
   users: [],
+  error: false
 }
 
 export const usersReducer = createReducer(
@@ -20,13 +21,16 @@ export const usersReducer = createReducer(
     ...state,
     isLoadingUsers: true
   })),
-  on(LoadingOffUsers, state => ({
+  on(GetUsers, (state, { users }) => ({
     ...state,
-    isLoadingUsers: false
+    isLoadingUsers: false,
+    users: users,
+    error: false
   })),
-  on(GetUsers, (state, { data }) => ({
+  on(GetUsersFailed, (state) => ({
     ...state,
-    users: data
+    isLoadingUsers: false,
+    error: true
   })),
   on(DeleteUser, (state, { data }) => ({
     ...state,

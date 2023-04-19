@@ -1,11 +1,10 @@
-import { GetUsers, LoadingOffUsers } from '../../../store/actions/users.action';
+import { LoadingOnUsers } from './../../../store/actions/users.action';
 import { Store } from '@ngrx/store';
-import { User } from '../../../interfaces/user.interface';
-import { UsersService } from '../../../services/users.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { selectIsLoadingUsers, selectUsers } from 'src/app/store/selectors/users.selector';
-import { ModalDirective } from 'src/app/directives/modal.directive';
+import { selectIsLoadingUsers, selectUsers, selectUsersError } from 'src/app/store/selectors/users.selector';
+import { ModalDirective } from 'src/app/directives/directives/modal.directive';
 import { AddPopupComponent } from '../components/add-popup/add-popup.component';
+import { User } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-main-page',
@@ -22,29 +21,15 @@ export class MainPageComponent implements OnInit {
 
   public errorMessage: boolean = false;
 
-  constructor(
-    private usersService: UsersService,
-    private readonly store: Store
-  ) {}
+  constructor(private readonly store: Store) {}
 
   ngOnInit(): void {
-    let users = localStorage.getItem('users');
-    if (users) {
-      this.store.select(selectUsers).subscribe((value) => this.users = value);
-      this.store.select(selectIsLoadingUsers).subscribe((value) => this.isLoading = value)
-    } else {
-      this.usersService.getUsers().subscribe({
-        next: data => {
-          this.store.dispatch(GetUsers({data: data}));
-          this.store.dispatch(LoadingOffUsers());
-          this.store.select(selectUsers).subscribe((value) => this.users = value);
-          this.store.select(selectIsLoadingUsers).subscribe((value) => this.isLoading = value)
-        },
-        error: () => {
-          this.errorMessage = true;
-          this.isLoading = false;
-        }
-    });
+    this.store.select(selectUsers).subscribe((value) => this.users = value);
+    this.store.select(selectIsLoadingUsers).subscribe((value) => this.isLoading = value);
+    this.store.select(selectUsersError).subscribe((value) => this.errorMessage = value);
+    const users = localStorage.getItem('users');
+    if (!users || JSON.parse(users).users.length === 0) {
+      this.store.dispatch(LoadingOnUsers());
     }
   }
 
