@@ -1,18 +1,15 @@
-<form
-  *ngIf="searchForm"
-  [formGroup]="searchForm"
-  (ngSubmit)="search()"
-  class="search-form"
->
+<div class="search-form">
   <app-input
     type="text"
     placeholder="Search"
-    formControlName="search"
     class="search-form__input"
+    [(ngModel)]="searchParam"
+    (keydown)="onKeyDownEvent($event)"
   />
   <div class="search-form__button">
     <app-button
       [isLoading]="isLoading"
+      (click)="search()"
     >
       <svg
         width="16"
@@ -29,4 +26,4 @@
       </svg>
     </app-button>
   </div>
-</form>
+</div>

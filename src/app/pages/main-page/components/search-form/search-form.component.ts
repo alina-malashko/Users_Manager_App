@@ -1,5 +1,6 @@
+import { AppPath } from 'src/app/enums/routing-path-enum';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-form',
@@ -10,22 +11,29 @@ export class SearchFormComponent implements OnInit {
 
   public isLoading: boolean | undefined;
 
-  public searchForm: FormGroup | undefined;
+  public searchParam: string | undefined;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(
+      (queryParam) => this.searchParam = queryParam['search']
+    )
     this.isLoading = false;
-    this.initForm();
-  }
-
-  private initForm(): void {
-    this.searchForm = this.formBuilder.group({
-      search: [''],
-    })
   }
 
   public search(): void {
+    this.isLoading = true;
+    this.router.navigate(
+      [AppPath.MainFullPath], { queryParams: { search: this.searchParam }}
+    );
+    this.isLoading = false;
+  }
 
+  public onKeyDownEvent(event: KeyboardEvent){
+    if (event.key === 'Enter') this.search();
   }
 }

@@ -1,9 +1,9 @@
 import { UserLocation, UserName } from './../../../../interfaces/user.interface';
 import { Component, Input, OnInit } from '@angular/core';
-import { ColDef, SelectionChangedEvent, ValueFormatterParams } from 'ag-grid-community';
+import { ColDef, GetQuickFilterTextParams, GridApi, GridReadyEvent, ICellRendererParams, SelectionChangedEvent, ValueFormatterParams } from 'ag-grid-community';
 import { User } from 'src/app/interfaces/user.interface';
 import { AppPath } from 'src/app/enums/routing-path-enum';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -14,12 +14,25 @@ export class TableComponent implements OnInit {
 
   @Input() users: User[] | undefined;
 
+  private gridApi!: GridApi;
+
+  private searchText: string | undefined;
+
   public columnDefs: ColDef[] | undefined;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.initColumns();
+    this.route.queryParams.subscribe(
+      (queryParam) => {
+        this.searchText = queryParam['search']
+        this.onFilterChanged();
+      }
+    )
   }
 
   private initColumns(): void {
@@ -35,7 +48,10 @@ export class TableComponent implements OnInit {
         },
         valueFormatter: (params: ValueFormatterParams) => {
           return Object.values(params.data.name).join(' ');
-        }
+        },
+        getQuickFilterText: (params: GetQuickFilterTextParams) => {
+          return Object.values(params.value).join(' ');
+        },
       },
       {
         field: 'location',
@@ -48,7 +64,10 @@ export class TableComponent implements OnInit {
         },
         valueFormatter: (params: ValueFormatterParams) => {
           return Object.values(params.data.location).join(', ');
-        }
+        },
+        getQuickFilterText: (params: GetQuickFilterTextParams) => {
+          return Object.values(params.value).join(' ');
+        },
       },
       {
         field: 'email',
@@ -79,7 +98,7 @@ export class TableComponent implements OnInit {
       },
       {
         field: 'picture',
-        cellRenderer: (params: any) => {
+        cellRenderer: (params: ICellRendererParams) => {
           return `<a href="${params.data.picture}" title="image">link</a>`;
         },
         maxWidth: 100,
@@ -90,6 +109,17 @@ export class TableComponent implements OnInit {
         sortable: true,
       }
     ]
+  }
+
+  private onFilterChanged(): void {
+    if (this.searchText != undefined && this.gridApi) {
+      this.gridApi.setQuickFilter(this.searchText)
+    }
+  }
+
+  public onGridReady(params: GridReadyEvent): void {
+    this.gridApi = params.api;
+    this.onFilterChanged();
   }
 
   public onSelectionChanged(event: SelectionChangedEvent) {
