@@ -1,3 +1,4 @@
+import { InputFileComponent } from './input-file/input-file.component';
 import { LogoutComponent } from './logout/logout.component';
 import { InputErrorComponent } from './input-error/input-error.component';
 import { LinkComponent } from './link/link.component';
@@ -15,6 +16,7 @@ const components = [
   LoaderComponent,
   LinkComponent,
   LogoutComponent,
+  InputFileComponent
 ];
 @NgModule({
   declarations: components,

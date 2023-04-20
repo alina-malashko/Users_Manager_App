@@ -1,4 +1,3 @@
-import { URL_PATTERN } from './../../../constants/pattern.constants';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -59,7 +58,7 @@ export class EditUserPageComponent implements OnInit {
       birth: [this.userInfo?.birth, Validators.required],
       registered: [{value: this.userInfo?.registered, disabled: true}],
       phone: [this.userInfo?.phone, Validators.required],
-      picture: [this.userInfo?.picture, [Validators.required, Validators.pattern(URL_PATTERN)]],
+      picture: [this.userInfo?.picture, [Validators.required]],
       nationality: [this.userInfo?.nationality, Validators.required]
     })
   }

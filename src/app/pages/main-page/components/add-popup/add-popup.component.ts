@@ -1,8 +1,8 @@
-import { URL_PATTERN } from './../../../../constants/pattern.constants';
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddUser } from 'src/app/store/actions/users.action';
 import { Store } from '@ngrx/store';
+import { HelpersService } from 'src/app/services/helpers.service';
 
 @Component({
   selector: 'app-add-popup',
@@ -19,7 +19,8 @@ export class AddPopupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private readonly store: Store
+    private readonly store: Store,
+    private helpersService: HelpersService
   ) {}
 
   ngOnInit(): void {
@@ -40,9 +41,9 @@ export class AddPopupComponent implements OnInit {
       }),
       email: ['', [Validators.required, Validators.email]],
       birth: ['', Validators.required],
-      registered: [{value: new Date(), disabled: true}],
+      registered: [{value: this.helpersService.formateDate(new Date().toDateString()), disabled: true}],
       phone: ['', Validators.required],
-      picture: ['', [Validators.required, Validators.pattern(URL_PATTERN)]],
+      picture: ['', Validators.required],
       nationality: ['', Validators.required]
     })
   }
@@ -51,9 +52,17 @@ export class AddPopupComponent implements OnInit {
     this.toggleAddPopUp.emit();
   }
 
+  public onChangeFile(base64: string | ArrayBuffer | null) {
+    this.newUserForm?.patchValue({
+      picture: base64
+    })
+  }
+
   public saveUser(): void {
     this.isLoading = true;
-    this.store.dispatch(AddUser({data: this.newUserForm?.getRawValue()}))
+    this.store.dispatch(AddUser({data: {
+      ...this.newUserForm?.getRawValue()
+    }}))
     this.isLoading = false;
     this.togglePopUp();
   }
