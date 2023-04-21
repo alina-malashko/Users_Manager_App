@@ -1,0 +1,34 @@
+@import '../../../assets/scss/variables.scss';
+
+.button {
+  font-family:"Red Hat Display", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.3;
+  padding: 14px 0;
+  font-size: 1em;
+  width: 100%;
+  font-weight: 600;
+  background-color: $button-default;
+  border-radius: 12px;
+  text-align: center;
+  color: $text-white;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  &:hover, &:focus {
+    background-color: $button-hover;
+  }
+  &:active {
+    background-color: $button-active;
+  }
+  &:disabled {
+    background-color: $button-disabled;
+    color: $text-dsb-button;
+  }
+  &__loader {
+    width: 20px;
+    height: 20px;
+  }
+}

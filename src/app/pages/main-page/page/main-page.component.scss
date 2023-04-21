@@ -1,0 +1,45 @@
+@import '../../../../assets/scss/variables.scss';
+
+.page {
+  background: $background-main;
+  padding: 100px 50px 0;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 150px;
+    &__title {
+      color: $text-blue;
+      font-weight: 700;
+      font-size: 2.25em;
+      line-height: 1.3;
+    }
+  }
+  &__main {
+    &__heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 50px;
+      &__button {
+        width: 100px;
+      }
+      &__search-input {
+        width: 55%;
+      }
+    }
+    &__table {
+      max-width: 1390px;
+      width: 100%;
+    }
+  }
+  &__loader {
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+  }
+  &__error {
+    font-size: 1.5em;
+    font-weight: 500;
+    color: $text-dark-blue;
+  }
+}

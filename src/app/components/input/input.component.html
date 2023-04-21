@@ -1,0 +1,13 @@
+<div class="input">
+  <input
+    [type]="type"
+    [placeholder]="placeholder"
+    class="input__field"
+    [(ngModel)]="value"
+    (ngModelChange)="inputChanged($event)"
+    [disabled]="disabled"
+  >
+  <div class="input__error">
+    <app-input-error>Required field</app-input-error>
+  </div>
+</div>

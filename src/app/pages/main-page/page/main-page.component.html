@@ -1,0 +1,32 @@
+<div class="page">
+  <header class="page__header">
+    <h1 class="page__header__title">Users Manager App</h1>
+    <div class="page__header__link">
+      <app-logout></app-logout>
+    </div>
+  </header>
+  <div *ngIf="isLoading" class="page__loader">
+    <app-loader></app-loader>
+  </div>
+  <div *ngIf="!isLoading && errorMessage" class="page__error">
+    Oops! Something went wrong, please reload the page
+  </div>
+  <main *ngIf="!isLoading && !errorMessage" class="page__main">
+    <div class="page__main__heading">
+      <div class="page__main__heading__search-input">
+        <app-search-form></app-search-form>
+      </div>
+      <div class="page__main__heading__button">
+        <app-add-button
+          (click)="toggleAddPopUp()"
+        ></app-add-button>
+      </div>
+    </div>
+    <div class="page__main__table">
+      <app-table
+        [users]="users"
+      ></app-table>
+    </div>
+  </main>
+  <ng-template modalHost></ng-template>
+</div>

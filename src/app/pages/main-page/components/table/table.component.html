@@ -1,0 +1,10 @@
+<ag-grid-angular
+  *ngIf="users"
+  domLayout="autoHeight"
+  [rowData]="users"
+  [columnDefs]="columnDefs"
+  class="ag-theme-alpine"
+  rowSelection="single"
+  (selectionChanged)="onSelectionChanged($event)"
+  (gridReady)="onGridReady($event)"
+></ag-grid-angular>

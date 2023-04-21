@@ -1,0 +1,22 @@
+<div class="input">
+  <label
+    for="file"
+    class="input__label"
+  >
+    <span *ngIf="!isLoading">Add photo</span>
+    <app-loader *ngIf="isLoading"></app-loader>
+  </label>
+  <input
+    type="file"
+    id="file"
+    class="input__field"
+    (change)="onChange($event)"
+  >
+  <div class="input__error">
+    <app-input-error
+      *ngIf="error"
+    >
+      Invalid format
+    </app-input-error>
+  </div>
+</div>

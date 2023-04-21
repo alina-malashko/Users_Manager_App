@@ -1,0 +1,59 @@
+@import '../../../assets/scss/variables.scss';
+
+:host {
+  &.ng-invalid.ng-touched {
+    & .input__field {
+      color: $text-error;
+      border-color: $input-stroke-error;
+      &:hover, &:focus {
+        border-color: $input-stroke-error;
+      }
+      &::placeholder, &:focus::placeholder {
+        color: $text-error
+      }
+    }
+    & .input__error {
+      display: block;
+    }
+  }
+}
+
+.input {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  &__field {
+    width: 100%;
+    font-family: "Red Hat Display", sans-serif;
+    font-size: 1em;
+    line-height: 1.3;
+    padding: 8px;
+    border-radius: 15px;
+    background-color: $input-background;
+    height: 100%;
+    font-weight: 400;
+    outline: none;
+    color: $text-dark-blue;
+    border: 1px solid transparent;
+    &:hover:not(:disabled), &:focus {
+      border-color: $input-stroke-active;
+    }
+    &::placeholder {
+      font-family: "Red Hat Display", sans-serif;
+      font-size: 1em;
+      line-height: 1.3;
+      color: $text-grey;
+    }
+    &:focus::placeholder {
+      color: $text-grey;
+    }
+    &:disabled {
+      color: $text-grey;
+    }
+  }
+  &__error {
+    top: 100%;
+    position: absolute;
+    display: none;
+  }
+}
