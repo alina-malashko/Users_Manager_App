@@ -22,4 +22,15 @@ export class HelpersService {
     const day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
     return `${year}-${month}-${day}`;
   }
+
+  public getIdForNewUser(): number {
+    let index = 0;
+    const store = localStorage.getItem('users');
+    if (store) {
+      const users = JSON.parse(store).users;
+      if (users.length == 0) return 0;
+      index = users[users.length-1].id + 1
+    }
+    return index;
+  }
 }

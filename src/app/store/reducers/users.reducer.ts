@@ -18,13 +18,15 @@ const initialState: UsersState = {
 export const usersReducer = createReducer(
   initialState,
   on(LoadingOnUsers, state => ({
-    ...state,
-    isLoadingUsers: true
+    ...state
   })),
   on(GetUsers, (state, { users }) => ({
     ...state,
     isLoadingUsers: false,
-    users: users,
+    users: [
+      ...state.users,
+      ...users
+    ],
     error: false
   })),
   on(GetUsersFailed, (state) => ({
@@ -57,8 +59,8 @@ export const usersReducer = createReducer(
     users: [
       ...state.users,
       {
-        ...data,
-        id: state.users.length
+        id: state.users.length,
+        ...data
       }
     ]
   })),

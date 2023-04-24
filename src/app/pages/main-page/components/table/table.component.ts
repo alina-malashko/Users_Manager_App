@@ -96,13 +96,13 @@ export class TableComponent implements OnInit {
         maxWidth: 150,
         sortable: true,
       },
-      {
-        field: 'picture',
-        cellRenderer: (params: ICellRendererParams) => {
-          return `<a href="${params.data.picture}" title="image">link</a>`;
-        },
-        maxWidth: 100,
-      },
+      // {
+      //   field: 'picture',
+      //   cellRenderer: (params: ICellRendererParams) => {
+      //     return `<a href="${params.data.picture}" title="image">link</a>`;
+      //   },
+      //   maxWidth: 100,
+      // },
       {
         field: 'nationality',
         maxWidth: 110,

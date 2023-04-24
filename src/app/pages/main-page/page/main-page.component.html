@@ -1,4 +1,10 @@
-<div class="page">
+<div
+  infinite-scroll
+  [infiniteScrollDistance]="3"
+  [infiniteScrollThrottle]="500"
+  (scrolled)="onScroll()"
+  class="page"
+>
   <header class="page__header">
     <h1 class="page__header__title">Users Manager App</h1>
     <div class="page__header__link">

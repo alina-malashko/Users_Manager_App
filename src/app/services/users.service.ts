@@ -22,7 +22,7 @@ export class UsersService {
       map((data) => data.results),
       map((users) => (
         users.map((user: any, index: number) => ({
-          id: index,
+          id: index + this.helpersService.getIdForNewUser(),
           name: user.name,
           location: {
             city: user.location.city,

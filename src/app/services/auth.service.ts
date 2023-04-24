@@ -16,6 +16,10 @@ export class AuthService {
     private helpersService: HelpersService
   ) {}
 
+  get token(): string {
+    return localStorage.getItem('token') || '';
+  }
+
   public signIn(email: string, password: string): Observable<any> {
 
     const sideEffects = (user: any): Observable<any> => {

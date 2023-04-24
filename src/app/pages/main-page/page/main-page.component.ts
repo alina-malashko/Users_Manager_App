@@ -33,6 +33,10 @@ export class MainPageComponent implements OnInit {
     }
   }
 
+  public onScroll(): void {
+    this.store.dispatch(LoadingOnUsers());
+  }
+
   public toggleAddPopUp(): void {
     const viewContainerRef = this.modalHost.viewContainerRef;
     viewContainerRef.clear();

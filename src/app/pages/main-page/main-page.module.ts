@@ -10,6 +10,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { TableComponent } from './components/table/table.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { AddPopupComponent } from './components/add-popup/add-popup.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AddPopupComponent } from './components/add-popup/add-popup.component';
     FormsModule,
     ComponentsModule,
     MainPageRoutingModule,
-    DirectivesModule
+    DirectivesModule,
+    InfiniteScrollModule
   ],
   exports: [
     MainPageComponent

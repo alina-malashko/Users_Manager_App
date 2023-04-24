@@ -1,5 +1,5 @@
 export const environment = {
-  usersUrl: 'https://randomuser.me/api/?results=100',
+  usersUrl: 'https://randomuser.me/api/?results=40',
   firebaseConfig: {
     apiKey: "AIzaSyDotfNB8WujstLXRz_j2lC6O7aOqP-2Gqk",
     authDomain: "users-manager-app.firebaseapp.com",
