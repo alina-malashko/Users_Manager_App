@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPageComponent implements OnInit {
 
@@ -15,7 +16,7 @@ export class LoginPageComponent implements OnInit {
 
   public signInForm: FormGroup | undefined;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) {}
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.isLoading = false;
@@ -39,6 +40,7 @@ export class LoginPageComponent implements OnInit {
       error: () => {
         this.isLoading = false;
         this.authFailed = true;
+        this.ref.markForCheck();
       }
     })
   }

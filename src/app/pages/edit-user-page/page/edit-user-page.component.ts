@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -12,7 +12,8 @@ import { ModalDirective } from 'src/app/directives/directives/modal.directive';
 @Component({
   selector: 'app-page',
   templateUrl: './edit-user-page.component.html',
-  styleUrls: ['./edit-user-page.component.scss']
+  styleUrls: ['./edit-user-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditUserPageComponent implements OnInit {
 

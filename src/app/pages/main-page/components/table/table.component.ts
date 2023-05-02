@@ -1,5 +1,5 @@
 import { UserLocation, UserName } from './../../../../interfaces/user.interface';
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ColDef, GetQuickFilterTextParams, GridApi, GridReadyEvent, ICellRendererParams, SelectionChangedEvent, ValueFormatterParams } from 'ag-grid-community';
 import { User } from 'src/app/interfaces/user.interface';
 import { AppPath } from 'src/app/enums/routing-path-enum';
@@ -8,7 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent implements OnInit {
 
@@ -96,13 +97,6 @@ export class TableComponent implements OnInit {
         maxWidth: 150,
         sortable: true,
       },
-      // {
-      //   field: 'picture',
-      //   cellRenderer: (params: ICellRendererParams) => {
-      //     return `<a href="${params.data.picture}" title="image">link</a>`;
-      //   },
-      //   maxWidth: 100,
-      // },
       {
         field: 'nationality',
         maxWidth: 110,

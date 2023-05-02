@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppPath } from 'src/app/enums/routing-path-enum';
@@ -7,7 +7,8 @@ import { DeleteUser } from 'src/app/store/actions/users.action';
 @Component({
   selector: 'app-delete-popup',
   templateUrl: './delete-popup.component.html',
-  styleUrls: ['./delete-popup.component.scss']
+  styleUrls: ['./delete-popup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DeletePopupComponent implements OnInit {
 

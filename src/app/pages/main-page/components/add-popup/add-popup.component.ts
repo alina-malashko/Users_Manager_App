@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddUser } from 'src/app/store/actions/users.action';
 import { Store } from '@ngrx/store';
@@ -7,7 +7,8 @@ import { HelpersService } from 'src/app/services/helpers.service';
 @Component({
   selector: 'app-add-popup',
   templateUrl: './add-popup.component.html',
-  styleUrls: ['./add-popup.component.scss']
+  styleUrls: ['./add-popup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddPopupComponent implements OnInit {
 
